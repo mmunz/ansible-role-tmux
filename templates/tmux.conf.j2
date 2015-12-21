@@ -1,0 +1,33 @@
+{% if tmux_mouse_mode %}
+set -g mode-mouse on
+set -g mouse-resize-pane on
+set -g mouse-select-pane on
+set -g mouse-select-window on
+{% endif %}
+
+{% if tmux_vi_mode %}
+set -g mode-keys vi
+set -g @shell_mode 'vi'
+
+# Vim-style copy/paste
+unbind [
+bind y copy-mode
+unbind p
+bind p paste-buffer
+bind -t vi-copy v begin-selection
+bind -t vi-copy y copy-pipe "xclip -i -sel clipboard"
+bind -t vi-copy Escape cancel
+{% endif %}
+
+{% if tmux_version.stdout|float >= 1.9 %}
+set -g @plugin 'tmux-plugins/tpm'
+{% for plugin in tmux_plugins %}
+set -g @plugin '{{ plugin }}'
+{% endfor %}
+
+run '~/.tmux/plugins/tpm/tpm'
+
+{% if tmux_powerline %}
+source "{{ tmux_powerline_binding_file }}"
+{% endif %}
+{% endif %}

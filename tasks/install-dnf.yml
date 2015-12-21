@@ -1,0 +1,15 @@
+---
+- name: "include variables for dnf installation of tmux"
+  include_vars: dnf.yml
+
+- name: ensure tmux is installed
+  dnf: name="{{ item }}"
+  sudo: yes
+  with_items:
+    - git
+    - tmux
+
+- name: ensure powerline for tmux is installed
+  dnf: name=tmux-powerline
+  sudo: yes
+  when: tmux_powerline

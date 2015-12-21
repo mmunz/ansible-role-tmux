@@ -1,0 +1,13 @@
+---
+- include: install-dnf.yml
+  when: "ansible_os_family == 'RedHat'"
+
+- include: install-apt.yml
+  when: "ansible_os_family != 'RedHat'"
+
+- name: "get version of tmux"
+  shell: tmux -V | cut -d" " -f2
+  register: tmux_version
+  changed_when: false
+
+- include: config.yml

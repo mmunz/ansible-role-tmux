@@ -1,0 +1,8 @@
+---
+tmux_powerline: yes
+tmux_mouse_mode: yes
+tmux_vi_mode: yes
+tmux_plugins:
+  - "tmux-plugins/tmux-sensible"
+tmux_users:
+  - vagrant

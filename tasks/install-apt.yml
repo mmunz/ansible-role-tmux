@@ -1,0 +1,10 @@
+---
+- name: "include variables for apt installation of tmux"
+  include_vars: apt.yml
+
+- name: ensure tmux is installed
+  apt: name="{{ item }}"
+  sudo: yes
+  with_items:
+    - git
+    - tmux

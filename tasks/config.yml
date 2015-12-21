@@ -1,0 +1,40 @@
+---
+- name: "retrieve the list of home directories"
+  command: ls /home
+  register: home_dirs
+  changed_when: false
+
+- name: ensure tmux plugin directory exists
+  file: path="/home/{{ item }}/.tmux/plugins"
+        state=directory
+        recurse=yes
+  sudo: yes
+  sudo_user: "{{ item }}"
+  when: "item in home_dirs.stdout_lines"
+  with_items: tmux_users
+
+- name: ensure tmux plugin manager is installed
+  git: repo=https://github.com/tmux-plugins/tpm
+       dest="/home/{{ item }}/.tmux/plugins/tpm"
+       version=master
+  sudo: yes
+  sudo_user: "{{ item }}"
+  when: "item in home_dirs.stdout_lines"
+  with_items: tmux_users
+
+- name: ensure tmux configuration is installed
+  template: src=tmux.conf.j2
+            dest="/home/{{ item }}/.tmux/global.conf"
+  sudo: yes
+  sudo_user: "{{ item }}"
+  when: "item in home_dirs.stdout_lines"
+  with_items: tmux_users
+
+- name: ensure tmux configuration is loaded
+  lineinfile: dest="/home/{{ item }}/.tmux.conf"
+              line='source ".tmux/global.conf"'
+              create=yes
+  sudo: yes
+  sudo_user: "{{ item }}"
+  when: "item in home_dirs.stdout_lines"
+  with_items: tmux_users
