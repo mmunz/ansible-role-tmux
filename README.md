@@ -10,11 +10,13 @@ None.
 
 Available variables are listed below, along with default values:
 
-    ssmtp_recipient: postmaster
-    ssmtp_mailhub: mail
-    ssmtp_use_tls: yes
-    ssmtp_auth_username: ~
-    ssmtp_auth_password: ~
+    tmux_powerline: yes
+    tmux_mouse_mode: yes
+    tmux_vi_mode: yes
+    tmux_plugins:
+      - "tmux-plugins/tmux-sensible"
+    tmux_users:
+      - vagrant
 
 ## Dependencies
 
