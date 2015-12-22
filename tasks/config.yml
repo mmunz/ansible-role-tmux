@@ -32,7 +32,7 @@
 
 - name: ensure tmux configuration is loaded
   lineinfile: dest="/home/{{ item }}/.tmux.conf"
-              line='source ".tmux/global.conf"'
+              line="source ~/.tmux/global.conf"
               create=yes
   sudo: yes
   sudo_user: "{{ item }}"
