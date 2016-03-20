@@ -1,12 +1,23 @@
 ---
-- include: install-dnf.yml
-  when: "ansible_os_family == 'RedHat'"
+- include_vars: "{{ item }}"
+  with_first_found:
+   - "{{ ansible_distribution }}.yml"
+   - "{{ ansible_os_family }}.yml"
 
-- include: install-apt.yml
-  when: "ansible_os_family != 'RedHat'"
+- name: ensure tmux is installed
+  package:
+    name: "{{ item }}"
+  with_items:
+    - git
+    - tmux
 
-- name: "get version of tmux"
-  shell: tmux -V | cut -d" " -f2
+- name: ensure powerline for tmux is installed
+  dnf:
+    name: tmux-powerline
+  when: tmux_powerline and ansible_os_family == 'RedHat'
+
+- name: get version of tmux
+  shell: "tmux -V | cut -d' ' -f2"
   register: tmux_version
   changed_when: false
 

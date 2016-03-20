@@ -7,7 +7,7 @@ export DEBIAN_FRONTEND=noninteractive
 if ! which ansible &>/dev/null; then
     if which dnf &>/dev/null; then
         echo "Installing Ansible"
-        dnf install -q -y ansible python-dnf >/dev/null || exit 1
+        dnf install --enablerepo updates-testing -q -y ansible python-dnf >/dev/null || exit 1
     else
         echo "Add APT repository"
         apt-get install -qq software-properties-common >/dev/null || exit 1
