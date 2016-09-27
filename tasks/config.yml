@@ -28,8 +28,9 @@
   template:
     src: tmux.conf.j2
     dest: "/home/{{ item }}/.tmux/global.conf"
-  become: yes
-  become_user: "{{ item }}"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0644
   when: item in home_dirs.stdout_lines
   with_items: "{{ tmux_users }}"
 
@@ -38,7 +39,8 @@
     dest: "/home/{{ item }}/.tmux.conf"
     line: "source ~/.tmux/global.conf"
     create: yes
-  become: yes
-  become_user: "{{ item }}"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0644
   when: item in home_dirs.stdout_lines
   with_items: "{{ tmux_users }}"

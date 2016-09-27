@@ -9,8 +9,6 @@ galaxy_info:
     versions:
     - trusty
   - name: Fedora
-    versions:
-    - 23
-  categories:
+  galaxy_tags:
   - system
 dependencies: []

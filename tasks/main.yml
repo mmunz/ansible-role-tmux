@@ -12,7 +12,7 @@
     - tmux
 
 - name: ensure powerline for tmux is installed
-  dnf:
+  package:
     name: tmux-powerline
   when: tmux_powerline and ansible_os_family == 'RedHat'
 
