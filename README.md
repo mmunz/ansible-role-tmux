@@ -18,6 +18,10 @@ Available variables are listed below, along with default values:
     tmux_users:
       - vagrant
 
+### Powerline
+
+This role configures powerline for tmux by default. This can be disabled with setting `tmux_powerline` to `no`.
+
 ## Dependencies
 
 None
