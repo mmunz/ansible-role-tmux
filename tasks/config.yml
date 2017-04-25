@@ -3,6 +3,7 @@
   command: ls -1 /home
   register: home_dirs
   changed_when: false
+  check_mode: no
 
 - name: ensure tmux plugin directory exists
   file:

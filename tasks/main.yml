@@ -20,5 +20,6 @@
   shell: "tmux -V | cut -d' ' -f2"
   register: tmux_version
   changed_when: false
+  check_mode: no
 
 - include: config.yml
