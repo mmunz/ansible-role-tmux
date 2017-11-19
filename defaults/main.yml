@@ -6,3 +6,4 @@ tmux_plugins:
   - "tmux-plugins/tmux-sensible"
 tmux_users:
   - vagrant
+tmux_config_template: tmux.conf.j2

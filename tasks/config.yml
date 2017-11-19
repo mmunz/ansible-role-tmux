@@ -27,7 +27,7 @@
 
 - name: ensure tmux configuration is installed
   template:
-    src: tmux.conf.j2
+    src: "{{ tmux_config_template }}"
     dest: "/home/{{ item }}/.tmux/global.conf"
     owner: "{{ item }}"
     group: "{{ item }}"
